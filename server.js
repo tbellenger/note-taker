@@ -21,7 +21,7 @@ app.get('/notes', (req, res) => {
 // api call to return all notes in the file
 app.get('/api/notes', async (req, res) => {
   notes = await readNotes();
-  return res.json(notes)
+  return res.json(notes);
 });
 
 // api call to add a note to the list
@@ -42,11 +42,7 @@ app.delete('/api/notes/:id', async (req, res) => {
   // data structure is array so need to search through 
   // all items to get the index. Map might be better
   let noteToRemoveIndex = notes.findIndex((note) => note.id == req.params.id);
-  console.log('Request to remove ' + req.params.id);
-  console.log(notes);
-  console.log('Removing index ' + noteToRemoveIndex);
   notes.splice(noteToRemoveIndex, 1);
-  console.log(notes);
   await writeNotes(notes);
   return res.send('Received DELETE request');
 })
